@@ -15,15 +15,16 @@ public class TC002_RegisterLoginUserTest extends BaseTest {
     public void TC002(){
 
         RegisterSuccessPage registerSuccessPage = new RegisterSuccessPage(driver);
+        LoginSuccessPage loginSuccessPage = new LoginSuccessPage(driver);
+
         registerSuccessPage.clickSignIn();
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.setUsername(Data.username);
-        loginPage.setPassword(Data.password);
-        loginPage.clickSubmit();
+        loginPage.setUsername(Data.username)
+                .setPassword(Data.password)
+                .clickSubmit()
 
-        LoginSuccessPage loginSuccessPage = new LoginSuccessPage(driver);
-        loginSuccessPage.loginSuccess();
+                .loginSuccess();
 
         Assert.assertTrue(loginSuccessPage.loginSuccess().contains("Login Successfully"),"Login error");
     }

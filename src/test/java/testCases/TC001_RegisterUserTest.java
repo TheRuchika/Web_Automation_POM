@@ -20,16 +20,17 @@ public class TC001_RegisterUserTest extends BaseTest {
         homePage.clickRegisterMenu();
 
         RegisterPage registerPage = new RegisterPage(driver);
-        registerPage.setFirstName("Ruchika");
-        registerPage.setLastName("Kaludewa");
-        registerPage.setPhone("0719368140");
-        registerPage.setEmail("ruchikapromodya@gmail.com");
-        registerPage.setUserName(username);
-        registerPage.setPassword(password);
-        registerPage.setConfirmPassword(password);
-        registerPage.clickSubmit();
-
         RegisterSuccessPage successPage = new RegisterSuccessPage(driver);
+
+        registerPage.setFirstName("Ruchika")
+                    .setLastName("Kaludewa")
+                    .setPhone("0719368140")
+                    .setEmail("ruchikapromodya@gmail.com")
+                    .setUserName(username)
+                    .setPassword(password)
+                    .setConfirmPassword(password)
+                    .clickSubmit();
+
         Assert.assertTrue(successPage.registerSuccess().contains("Dear"));
 
         Data.username = username;
