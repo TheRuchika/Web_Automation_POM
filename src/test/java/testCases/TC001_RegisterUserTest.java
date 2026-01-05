@@ -17,12 +17,10 @@ public class TC001_RegisterUserTest extends BaseTest {
         String password = "Ruchika123";
 
         HomePage homePage = new HomePage(driver);
-        homePage.clickRegisterMenu();
-
-        RegisterPage registerPage = new RegisterPage(driver);
         RegisterSuccessPage successPage = new RegisterSuccessPage(driver);
 
-        registerPage.setFirstName("Ruchika")
+        homePage.clickRegisterMenu()
+                    .setFirstName("Ruchika")
                     .setLastName("Kaludewa")
                     .setPhone("0719368140")
                     .setEmail("ruchikapromodya@gmail.com")
