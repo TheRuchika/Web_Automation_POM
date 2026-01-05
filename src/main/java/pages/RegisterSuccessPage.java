@@ -14,11 +14,16 @@ public class RegisterSuccessPage {
     }
 
     public By successTextElement= By.xpath("//b[contains(text(),'Dear')]");
-
+    public By signInElement = By.xpath("//a[contains(text(),'sign-in')]");
 
     public String registerSuccess (){
         String successText = driver.findElement(successTextElement).getText();
 
         return successText;
+    }
+
+    public void clickSignIn(){
+
+    driver.findElement(signInElement).click();
     }
 }
