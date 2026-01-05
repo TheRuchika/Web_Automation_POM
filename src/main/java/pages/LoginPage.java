@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class LoginPage {
 
     WebDriver driver;
+    private LoginPage LoginSuccessPage;
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
@@ -16,16 +17,22 @@ public class LoginPage {
     public By passwordElement = By.xpath("//input[@name='password']");
     public By submitButton=By.xpath("//input[@name='submit']");
 
-    public void setUsername (String username){
+    public LoginPage setUsername (String username){
         driver.findElement(userNameElement).sendKeys(username);
+        return this;
+
     }
 
-    public void setPassword (String password){
+    public LoginPage setPassword (String password){
         driver.findElement(passwordElement).sendKeys(password);
+        return this;
+
     }
 
-    public void clickSubmit(){
+    public LoginSuccessPage clickSubmit(){
         driver.findElement(submitButton).click();
+        return new LoginSuccessPage(driver);
+
     }
 
 }

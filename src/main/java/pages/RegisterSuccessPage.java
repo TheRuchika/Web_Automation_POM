@@ -22,8 +22,9 @@ public class RegisterSuccessPage {
         return successText;
     }
 
-    public void clickSignIn(){
+    public LoginPage clickSignIn(){
 
     driver.findElement(signInElement).click();
+    return new LoginPage(driver);
     }
 }
