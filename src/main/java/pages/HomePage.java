@@ -11,7 +11,7 @@ public class HomePage {
 
     }
 
-    By registerBtn_loc = By.linkText("REGISTER");
+    public By registerBtn_loc = By.linkText("REGISTER");
 
     public void clickRegisterMenu(){
         driver.findElement(registerBtn_loc).click();
