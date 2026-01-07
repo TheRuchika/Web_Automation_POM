@@ -3,36 +3,74 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+/**
+ * Page Object representing the Login page.
+ *
+ * This class contains:
+ * - Locators for login form fields
+ * - Actions to enter credentials and submit the form
+ */
 public class LoginPage {
 
-    WebDriver driver;
-    private LoginPage LoginSuccessPage;
+    private WebDriver driver;
 
-    public LoginPage(WebDriver driver){
+    /**
+     * Constructor to initialize WebDriver instance.
+     *
+     * @param driver WebDriver instance passed from test or previous page
+     */
+    public LoginPage(WebDriver driver) {
         this.driver = driver;
-
     }
 
-    public By userNameElement =By.xpath("//input[@name='userName']");
-    public By passwordElement = By.xpath("//input[@name='password']");
-    public By submitButton=By.xpath("//input[@name='submit']");
+    // ----------- Locators -----------
 
-    public LoginPage setUsername (String username){
-        driver.findElement(userNameElement).sendKeys(username);
+    /**
+     * Username input field.
+     */
+    private By userNameInput = By.name("userName");
+
+    /**
+     * Password input field.
+     */
+    private By passwordInput = By.name("password");
+
+    /**
+     * Submit/Login button.
+     */
+    private By submitButton = By.name("submit");
+
+    // ----------- Page Actions -----------
+
+    /**
+     * Enters the username into the username field.
+     *
+     * @param username login username
+     * @return current LoginPage instance (for method chaining)
+     */
+    public LoginPage setUsername(String username) {
+        driver.findElement(userNameInput).sendKeys(username);
         return this;
-
     }
 
-    public LoginPage setPassword (String password){
-        driver.findElement(passwordElement).sendKeys(password);
+    /**
+     * Enters the password into the password field.
+     *
+     * @param password login password
+     * @return current LoginPage instance (for method chaining)
+     */
+    public LoginPage setPassword(String password) {
+        driver.findElement(passwordInput).sendKeys(password);
         return this;
-
     }
 
-    public LoginSuccessPage clickSubmit(){
+    /**
+     * Clicks the submit button and navigates to the Login Success page.
+     *
+     * @return LoginSuccessPage object
+     */
+    public LoginSuccessPage clickSubmit() {
         driver.findElement(submitButton).click();
         return new LoginSuccessPage(driver);
-
     }
-
 }

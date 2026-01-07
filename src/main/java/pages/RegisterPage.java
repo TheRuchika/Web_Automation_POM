@@ -5,91 +5,152 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+/**
+ * Page Object representing the User Registration page.
+ *
+ * This class contains:
+ * - Locators for registration form fields
+ * - Actions to enter user details
+ * - Form submission that navigates to RegisterSuccessPage
+ */
 public class RegisterPage {
 
+    private WebDriver driver;
 
-    WebDriver driver;
-    public RegisterPage(WebDriver driver){
+    /**
+     * Constructor to initialize WebDriver instance.
+     *
+     * @param driver WebDriver instance passed from HomePage
+     */
+    public RegisterPage(WebDriver driver) {
         this.driver = driver;
-
     }
 
-    public By firstName_element =   By.xpath("//input[@name='firstName']");
-    public By lastName_element =   By.xpath("//input[@name='lastName']");
-    public By phone_element =  By.xpath("//input[@name='phone']");
-    public By email_element =  By.xpath("//input[@id='userName']");
-    public By address_element =     By.xpath("//input[@name='address1']");
-    public By city_element =   By.xpath("//input[@name='city']");
-    public By state_element =     By.xpath("//input[@name='state']");
-    public By postalCode_element =   By.xpath("//input[@name='postalCode']");
-    public By country_element =    By.xpath("//select[@name='country']");
-    public By userName_element =  By.xpath("//input[@id='email']");
-    public By password_element = By.xpath("//input[@name='password']");
-    public By confirmPassword_element = By.xpath("//input[@name='confirmPassword']");
-    public By submit_element = By.xpath("//input[@name='submit']");
+    // ----------- Locators -----------
 
-    public RegisterPage setFirstName(String firstName){
-        driver.findElement(firstName_element).sendKeys(firstName);
+    private By firstNameInput       = By.name("firstName");
+    private By lastNameInput        = By.name("lastName");
+    private By phoneInput           = By.name("phone");
+    private By emailInput           = By.id("userName");
+    private By addressInput         = By.name("address1");
+    private By cityInput            = By.name("city");
+    private By stateInput           = By.name("state");
+    private By postalCodeInput      = By.name("postalCode");
+    private By countryDropdown      = By.name("country");
+    private By userNameInput        = By.id("email");
+    private By passwordInput        = By.name("password");
+    private By confirmPasswordInput = By.name("confirmPassword");
+    private By submitButton         = By.name("submit");
+
+    // ----------- Page Actions -----------
+
+    /**
+     * Enters first name.
+     */
+    public RegisterPage setFirstName(String firstName) {
+        driver.findElement(firstNameInput).sendKeys(firstName);
         return this;
     }
-    public RegisterPage setLastName(String lastName){
-        driver.findElement(lastName_element).sendKeys(lastName);
-        return this;
 
-    }
-    public RegisterPage setPhone(String phone){
-        driver.findElement(phone_element).sendKeys(phone);
+    /**
+     * Enters last name.
+     */
+    public RegisterPage setLastName(String lastName) {
+        driver.findElement(lastNameInput).sendKeys(lastName);
         return this;
-
     }
-    public RegisterPage setEmail(String email){
-        driver.findElement(email_element).sendKeys(email);
+
+    /**
+     * Enters phone number.
+     */
+    public RegisterPage setPhone(String phone) {
+        driver.findElement(phoneInput).sendKeys(phone);
         return this;
-
     }
-    public RegisterPage setAddress(String address){
-        driver.findElement(address_element).sendKeys(address);
+
+    /**
+     * Enters email address.
+     */
+    public RegisterPage setEmail(String email) {
+        driver.findElement(emailInput).sendKeys(email);
         return this;
-
     }
-    public RegisterPage setCity(String city){
-        driver.findElement(city_element).sendKeys(city);
+
+    /**
+     * Enters address.
+     */
+    public RegisterPage setAddress(String address) {
+        driver.findElement(addressInput).sendKeys(address);
         return this;
-
     }
-    public RegisterPage setState(String state){
-        driver.findElement(state_element).sendKeys(state);
+
+    /**
+     * Enters city.
+     */
+    public RegisterPage setCity(String city) {
+        driver.findElement(cityInput).sendKeys(city);
         return this;
-
     }
-    public RegisterPage setPostalCode(String postalCode){
-        driver.findElement(postalCode_element).sendKeys(postalCode);
+
+    /**
+     * Enters state.
+     */
+    public RegisterPage setState(String state) {
+        driver.findElement(stateInput).sendKeys(state);
         return this;
+    }
 
-    }
-    public void  setCountry(String country){
-        WebElement countrySelect = driver.findElement(country_element);
-        Select dropDownCountry = new Select(countrySelect);
-        dropDownCountry.selectByIndex(2);
-    }
-    public RegisterPage setUserName(String userName){
-        driver.findElement(userName_element).sendKeys(userName);
+    /**
+     * Enters postal code.
+     */
+    public RegisterPage setPostalCode(String postalCode) {
+        driver.findElement(postalCodeInput).sendKeys(postalCode);
         return this;
-
     }
-    public RegisterPage setPassword(String password){
-        driver.findElement(password_element).sendKeys(password);
+
+    /**
+     * Selects country from dropdown.
+     *
+     * @param countryIndex index value of country dropdown
+     */
+    public RegisterPage selectCountryByIndex(int countryIndex) {
+        WebElement countryElement = driver.findElement(countryDropdown);
+        Select select = new Select(countryElement);
+        select.selectByIndex(countryIndex);
         return this;
-
     }
-    public RegisterPage setConfirmPassword(String confirmPassword){
-        driver.findElement(confirmPassword_element).sendKeys(confirmPassword);
+
+    /**
+     * Enters username.
+     */
+    public RegisterPage setUserName(String userName) {
+        driver.findElement(userNameInput).sendKeys(userName);
         return this;
-
     }
-    public RegisterSuccessPage clickSubmit(){
-        driver.findElement(submit_element).click();
+
+    /**
+     * Enters password.
+     */
+    public RegisterPage setPassword(String password) {
+        driver.findElement(passwordInput).sendKeys(password);
+        return this;
+    }
+
+    /**
+     * Enters confirm password.
+     */
+    public RegisterPage setConfirmPassword(String confirmPassword) {
+        driver.findElement(confirmPasswordInput).sendKeys(confirmPassword);
+        return this;
+    }
+
+    /**
+     * Submits the registration form.
+     *
+     * @return RegisterSuccessPage object
+     */
+    public RegisterSuccessPage clickSubmit() {
+        driver.findElement(submitButton).click();
         return new RegisterSuccessPage(driver);
-
     }
 }
