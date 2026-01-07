@@ -3,27 +3,37 @@ package testCases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Base.BaseTest;
-import pages.LoginPage;
 import pages.LoginSuccessPage;
 import pages.RegisterSuccessPage;
 import utils.Data;
 
-
+/**
+ * Test Case: TC002 – Login using registered user
+ *
+ * This test depends on TC001 (registration) and verifies that the user
+ * can log in successfully using the stored credentials.
+ */
 public class TC002_RegisterLoginUserTest extends BaseTest {
 
-    @Test(dependsOnMethods = "testCases.TC001_RegisterUserTest.TC001")
-    public void TC002(){
+    /**
+     * Navigates to Sign-In from Register Success page,
+     * logs in using stored credentials, and validates login success message.
+     */
+    @Test(dependsOnMethods = "testCases.TC001_RegisterUserTest.TC001_registerUser")
+    public void TC002_loginWithRegisteredUser() {
 
-        RegisterSuccessPage registerSuccessPage = new RegisterSuccessPage(driver);
-        LoginSuccessPage loginSuccessPage = new LoginSuccessPage(driver);
+        // Navigate to Login page via Sign-In link and perform login
+        LoginSuccessPage loginSuccessPage =
+                new RegisterSuccessPage(driver)
+                        .clickSignIn()
+                        .setUsername(Data.username)
+                        .setPassword(Data.password)
+                        .clickSubmit();
 
-        registerSuccessPage.clickSignIn()
-                            .setUsername(Data.username)
-                            .setPassword(Data.password)
-                            .clickSubmit()
-
-                            .loginSuccess();
-
-        Assert.assertTrue(loginSuccessPage.loginSuccess().contains("Login Successfully"),"Login error");
+        // Validate login success message
+        Assert.assertTrue(
+                loginSuccessPage.getLoginSuccessMessage().contains("Login Successfully"),
+                "Login failed: Success message not displayed"
+        );
     }
 }

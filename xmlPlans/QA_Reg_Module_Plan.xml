@@ -1,11 +1,25 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<suite name ="QA_Reg_Module_Plan1">
+<?xml version="1.0" encoding="UTF-8"?>
 
-    <test name="TC001">
+<!--
+ TestNG Suite: QA Registration Module
+ This suite executes end-to-end user registration
+ followed by login validation using POM framework.
+-->
+
+<suite name="QA_Reg_Module_Plan">
+
+    <!--
+     Test Group: Registration & Login Flow
+     TC001 → User Registration
+     TC002 → Login with Registered User (depends on TC001)
+    -->
+    <test name="Registration_and_Login_Tests">
+
         <classes>
-            <class name = "testCases.TC001_RegisterUserTest"/>
-            <class name = "testCases.TC002_RegisterLoginUserTest"/>
+            <class name="testCases.TC001_RegisterUserTest"/>
+            <class name="testCases.TC002_RegisterLoginUserTest"/>
         </classes>
+
     </test>
 
 </suite>
