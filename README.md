@@ -1,6 +1,7 @@
 # Selenium Page Object Model (POM) – Registration & Login Flow
 
 This project demonstrates a **Selenium Page Object Model (POM)** framework implemented using **Java and TestNG**.  
+The focus of this project is **clean structure, readability, and maintainable automation code**.
 
 ---
 
@@ -21,7 +22,10 @@ This project demonstrates a **Selenium Page Object Model (POM)** framework imple
 - Test classes contain **business flow and assertions**
 
 ### 🔹 Readability & Maintainability
+- Clear class and method names
+- Method chaining for fluent test steps
 - Well-structured comments explaining intent
+- No direct WebElement usage in test classes
 
 ### 🔹 Test Design
 - End-to-end registration and login flow
@@ -47,6 +51,8 @@ This project demonstrates a **Selenium Page Object Model (POM)** framework imple
 
 ---
 
+## ▶️ How to Run the Tests
 
 1. Clone the repository
    ```bash
+   git clone https://github.com/TheRuchika/Web_Automation_POM
