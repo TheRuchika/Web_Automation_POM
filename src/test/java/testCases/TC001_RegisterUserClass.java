@@ -10,8 +10,8 @@ import utils.PropertyFileReader;
 /**
  * Test Case: TC001 – User Registration
  *
- * Verifies that a user can successfully register
- * and receives a confirmation message.
+ * This test verifies that a user can successfully register
+ * using valid details and receives a confirmation message.
  */
 public class TC001_RegisterUserClass extends pages.Base.BaseClass {
 
