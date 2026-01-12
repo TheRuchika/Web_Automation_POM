@@ -2,10 +2,10 @@ package testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.Base.BaseTest;
 import pages.HomePage;
 import pages.RegisterSuccessPage;
 import utils.Data;
-import utils.PropertyFileReader;
 
 /**
  * Test Case: TC001 – User Registration
@@ -13,7 +13,7 @@ import utils.PropertyFileReader;
  * This test verifies that a user can successfully register
  * using valid details and receives a confirmation message.
  */
-public class TC001_RegisterUserClass extends pages.Base.BaseClass {
+public class TC001_RegisterUserTest extends BaseTest {
 
     String browser = PropertyFileReader.getInstance().getProperty("config","browser");
 
@@ -24,14 +24,14 @@ public class TC001_RegisterUserClass extends pages.Base.BaseClass {
     @Test
     public void TC001_registerUser() {
 
-        // Read test data from properties (externalized test data)
-        String username = PropertyFileReader.getInstance().getProperty("testData", "username");
-        String password = PropertyFileReader.getInstance().getProperty("testData", "pass");
+        // Test data (can be externalized later)
+        String username = "TheRuchika";
+        String password = "Ruchika1234";
 
         // Initialize Home Page
         HomePage homePage = new HomePage(driver);
 
-        // Perform user registration using POM method chaining
+        // Perform user registration using method chaining (POM)
         RegisterSuccessPage successPage =
                 homePage.clickRegisterMenu()
                         .setFirstName("Ruchika")
