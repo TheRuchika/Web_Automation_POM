@@ -26,7 +26,7 @@ public class TC001_RegisterUserTest extends BaseTest {
 
         // Test data (can be externalized later)
         String username = "TheRuchika";
-        String password = "Ruchika123";
+        String password = "Ruchika12345";
 
         // Initialize Home Page
         HomePage homePage = new HomePage(driver);
