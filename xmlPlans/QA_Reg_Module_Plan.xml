@@ -16,8 +16,10 @@
     <test name="Registration_and_Login_Tests">
 
         <classes>
-            <class name="testCases.TC001_RegisterUserTest"/>
-            <class name="testCases.TC002_RegisterLoginUserTest"/>
+<!--            <class name="testCases.TC001_RegisterUserTest"/>-->
+<!--            <class name="testCases.TC002_RegisterLoginUserTest"/>-->
+            <class name="testCases.TC001_RegisterUserTest_CrossBrowser"/>
+
         </classes>
 
     </test>
