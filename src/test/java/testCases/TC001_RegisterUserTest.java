@@ -6,6 +6,7 @@ import pages.Base.BaseTest;
 import pages.HomePage;
 import pages.RegisterSuccessPage;
 import utils.Data;
+import utils.PropertyFileReader;
 
 /**
  * Test Case: TC001 – User Registration
@@ -14,6 +15,9 @@ import utils.Data;
  * using valid details and receives a confirmation message.
  */
 public class TC001_RegisterUserTest extends BaseTest {
+
+    PropertyFileReader propertyFileReader = new PropertyFileReader();
+    String pass = propertyFileReader.getProperty("testData","pass");
 
     /**
      * Registers a new user and validates the success message.
@@ -37,7 +41,7 @@ public class TC001_RegisterUserTest extends BaseTest {
                         .setPhone("0719368140")
                         .setEmail("ruchikapromodya@gmail.com")
                         .setUserName(username)
-                        .setPassword(password)
+                        .setPassword(pass)
                         .setConfirmPassword(password)
                         .clickSubmit();
 

@@ -7,6 +7,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.Properties;
+
 /**
  * BaseTest class is responsible for:
  * - Initializing the WebDriver
@@ -24,9 +30,15 @@ public class BaseTest {
      * Initializes WebDriver once before the entire test suite.
      */
     @BeforeSuite
-    public void setup() {
+    public void setup() throws IOException {
 
-        String browser = "edge";
+        FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\config.properties");
+
+        Properties prop = new Properties();
+        prop.load(fileInputStream);
+
+
+        String browser = prop.getProperty("browser");
 
 
         switch (browser.toLowerCase()) {
@@ -45,9 +57,10 @@ public class BaseTest {
         }
 
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(prop.getProperty("implicit_wait"))));
 
         // Launch application
-        driver.get("https://demo.guru99.com/test/newtours/index.php");
+        driver.get(prop.getProperty("App_url"));
     }
 
 
