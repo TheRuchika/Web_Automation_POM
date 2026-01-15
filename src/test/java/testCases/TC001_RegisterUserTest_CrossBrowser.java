@@ -4,9 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Base.BaseTest;
 import pages.HomePage;
+import pages.RegisterPage;
 import pages.RegisterSuccessPage;
 import utils.Data;
-import utils.PropertyFileReader;
 
 /**
  * Test Case: TC001 – User Registration
@@ -14,10 +14,7 @@ import utils.PropertyFileReader;
  * This test verifies that a user can successfully register
  * using valid details and receives a confirmation message.
  */
-public class TC001_RegisterUserTest extends BaseTest {
-
-    PropertyFileReader propertyFileReader = new PropertyFileReader();
-    String pass = propertyFileReader.getProperty("testData","pass");
+public class TC001_RegisterUserTest_CrossBrowser extends BaseTest {
 
     /**
      * Registers a new user and validates the success message.
@@ -28,22 +25,21 @@ public class TC001_RegisterUserTest extends BaseTest {
 
         // Test data (can be externalized later)
         String username = "TheRuchika";
-        String password = "Ruchika12345";
+        String password = "Ruchika123";
 
-        // Initialize Home Page
         HomePage homePage = new HomePage(driver);
-
-        // Perform user registration using method chaining (POM)
-        RegisterSuccessPage successPage =
-                homePage.clickRegisterMenu()
-                        .setFirstName("Ruchika")
-                        .setLastName("Kaludewa")
-                        .setPhone("0719368140")
-                        .setEmail("ruchikapromodya@gmail.com")
-                        .setUserName(username)
-                        .setPassword(pass)
-                        .setConfirmPassword(password)
-                        .clickSubmit();
+        RegisterPage registerPage = new RegisterPage(driver);
+        RegisterSuccessPage successPage = new RegisterSuccessPage(driver);
+        
+        homePage.clickRegisterMenu();
+        registerPage.setFirstName("Ruchika");
+        registerPage.setLastName("Kaludewa");
+        registerPage.setPhone("0719368140");
+        registerPage.setEmail("ruchikapromodya@gmail.com");
+        registerPage.setUserName(username);
+        registerPage.setPassword(password);
+        registerPage.setConfirmPassword(password);
+        registerPage.clickSubmit();
 
         // Validate registration success message
         Assert.assertTrue(

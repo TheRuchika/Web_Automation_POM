@@ -6,6 +6,7 @@ import pages.Base.BaseTest;
 import pages.LoginSuccessPage;
 import pages.RegisterSuccessPage;
 import utils.Data;
+import utils.PropertyFileReader;
 
 /**
  * Test Case: TC002 – Login using registered user
@@ -14,6 +15,9 @@ import utils.Data;
  * can log in successfully using the stored credentials.
  */
 public class TC002_RegisterLoginUserTest extends BaseTest {
+
+    PropertyFileReader propertyFileReader = new PropertyFileReader();
+    String pass = propertyFileReader.getProperty("TestData","pass");
 
     /**
      * Navigates to Sign-In from Register Success page,
@@ -27,7 +31,7 @@ public class TC002_RegisterLoginUserTest extends BaseTest {
                 new RegisterSuccessPage(driver)
                         .clickSignIn()
                         .setUsername(Data.username)
-                        .setPassword(Data.password)
+                        .setPassword(pass)
                         .clickSubmit();
 
         // Validate login success message
