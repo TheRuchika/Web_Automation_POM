@@ -1,5 +1,8 @@
 package pages.Base;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -7,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,8 +27,27 @@ import java.util.Properties;
  */
 public class BaseTest {
 
+   private static final Logger logger = LogManager.getLogger(BaseTest.class);
+
     protected static WebDriver driver;
 
+
+    @BeforeSuite
+    public void beforeSuite(){
+        String logFilePath = "logs/automation.log";
+        File logFile = new File(logFilePath);
+
+        try {
+            if(logFile.exists()){
+                FileUtils.write(logFile,"",false);
+                logger.info("Log file cleaned: " + logFilePath);
+            }else {
+                FileUtils.touch(logFile);
+                logger.info("Log file created hence not exist: "+logFilePath);
+            }
+        } catch (IOException e) {
+                logger.error("Error cleaning of creating the log file: "+e.getMessage());        }
+    }
 
     /**
      * Initializes WebDriver once before the entire test suite.
@@ -55,6 +78,7 @@ public class BaseTest {
                 System.out.println("Browser not supported: " + browser);
                 return;
         }
+        logger.info("Test case automation with: " +browser);
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(prop.getProperty("implicit_wait"))));

@@ -1,5 +1,7 @@
 package testCases;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Base.BaseTest;
@@ -14,7 +16,9 @@ import utils.Data;
  * This test verifies that a user can successfully register
  * using valid details and receives a confirmation message.
  */
-public class TC001_RegisterUserTest_CrossBrowser extends BaseTest {
+public class TC001_RegisterUserTest_update extends BaseTest {
+
+    private static final Logger logger = LogManager.getLogger(TC001_RegisterUserTest_update.class);
 
     /**
      * Registers a new user and validates the success message.
@@ -22,6 +26,12 @@ public class TC001_RegisterUserTest_CrossBrowser extends BaseTest {
      */
     @Test
     public void TC001_registerUser() {
+
+        logger.debug("debug TC001_1 Test");
+        logger.info("*** Starting TC001_1 Test ***");
+        logger.warn("Warn TC001_1 Test");
+        logger.error("Error TC001_1 Test");
+        logger.fatal("Fatal TC001_1 Test");
 
         // Test data (can be externalized later)
         String username = "TheRuchika";
@@ -41,11 +51,14 @@ public class TC001_RegisterUserTest_CrossBrowser extends BaseTest {
         registerPage.setConfirmPassword(password);
         registerPage.clickSubmit();
 
+
         // Validate registration success message
         Assert.assertTrue(
                 successPage.getRegisterSuccessMessage().contains("Dear"),
                 "Registration failed: Success message not displayed"
         );
+
+        logger.info("*** Executed TC001_1 Test ***");
 
         // Store credentials for login test (TC002)
         Data.username = username;
