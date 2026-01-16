@@ -1,8 +1,11 @@
 package pages.Base;
 
+import com.aventstack.chaintest.service.ChainPluginService;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -12,7 +15,6 @@ import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
@@ -34,10 +36,21 @@ public class BaseTest {
 
     @BeforeSuite
     public void beforeSuite(){
-        String logFilePath = "logs/automation.log";
-        File logFile = new File(logFilePath);
+
+        ChainPluginService.getInstance().addSystemInfo("Tester",System.getProperty("user.name"));
+        ChainPluginService.getInstance().addSystemInfo("Browser", "chrome");
+
+        try{
+            String screenShotPath = System.getProperty("user.dir") + "/test-output/chainset/resources";
+            FileUtils.cleanDirectory(new File(screenShotPath));
+            logger.info("Screenshot folder cleaned : test-output/chaintest");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
+            String logFilePath = "logs/automation.log";
+            File logFile = new File(logFilePath);
             if(logFile.exists()){
                 FileUtils.write(logFile,"",false);
                 logger.info("Log file cleaned: " + logFilePath);
@@ -97,6 +110,12 @@ public class BaseTest {
             driver.quit();
             driver = null;
         }
+    }
+
+    public byte[] takeScreenshot(){
+        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+        byte[] screenShot = takesScreenshot.getScreenshotAs(OutputType.BYTES);
+        return screenShot;
     }
 
 }

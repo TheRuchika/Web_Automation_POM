@@ -1,5 +1,6 @@
 package testCases;
 
+import com.aventstack.chaintest.plugins.ChainTestListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
@@ -27,6 +28,7 @@ public class TC001_RegisterUserTest_update extends BaseTest {
     @Test
     public void TC001_registerUser() {
 
+        ChainTestListener.log("Test execution started");
         logger.debug("debug TC001_1 Test");
         logger.info("*** Starting TC001_1 Test ***");
         logger.warn("Warn TC001_1 Test");
@@ -42,14 +44,18 @@ public class TC001_RegisterUserTest_update extends BaseTest {
         RegisterSuccessPage successPage = new RegisterSuccessPage(driver);
         
         homePage.clickRegisterMenu();
+        ChainTestListener.embed(takeScreenshot(),"image/png");
         registerPage.setFirstName("Ruchika");
         registerPage.setLastName("Kaludewa");
         registerPage.setPhone("0719368140");
         registerPage.setEmail("ruchikapromodya@gmail.com");
+        ChainTestListener.embed(takeScreenshot(),"image/png");
         registerPage.setUserName(username);
         registerPage.setPassword(password);
         registerPage.setConfirmPassword(password);
         registerPage.clickSubmit();
+        ChainTestListener.embed(takeScreenshot(),"image/png");
+
 
 
         // Validate registration success message
