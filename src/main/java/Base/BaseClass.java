@@ -12,6 +12,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import utils.PropertyFileReader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,9 +28,9 @@ import java.util.Properties;
  *
  * All test classes should extend this class.
  */
-public class BaseTest {
+public class BaseClass {
 
-   private static final Logger logger = LogManager.getLogger(BaseTest.class);
+   private static final Logger logger = LogManager.getLogger(pages.Base.BaseClass.class);
 
     protected static WebDriver driver;
 
@@ -68,14 +69,16 @@ public class BaseTest {
     @BeforeSuite
     public void setup() throws IOException {
 
+
+
         FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\config.properties");
 
         Properties prop = new Properties();
         prop.load(fileInputStream);
 
-
-        String browser = prop.getProperty("browser");
-
+        //Singleton Design pattern
+        String browser = PropertyFileReader.getInstance().getProperty("config","browser");
+        String appURL = PropertyFileReader.getInstance().getProperty("config","App_URL");
 
         switch (browser.toLowerCase()) {
             case "chrome":
@@ -97,7 +100,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(prop.getProperty("implicit_wait"))));
 
         // Launch application
-        driver.get(prop.getProperty("App_url"));
+        driver.get(appURL);
     }
 
 

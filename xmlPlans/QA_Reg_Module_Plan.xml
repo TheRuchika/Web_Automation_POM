@@ -11,7 +11,7 @@
 
     <listeners>
         <listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
-        <listener class-name="utils.ChainTestReportListenerManager"/>
+        <listener class-name="utils.ChainClassReportListenerManager"/>
     </listeners>
 
     <!--
@@ -22,9 +22,9 @@
     <test name="Registration_and_Login_Tests">
 
         <classes>
-            <class name="testCases.TC001_RegisterUserTest"/>
-            <class name="testCases.TC002_RegisterLoginUserTest"/>
-            <class name="testCases.TC001_RegisterUserTest_update"/>
+            <class name="testCases.TC001_RegisterUserClass"/>
+            <class name="testCases.TC002_RegisterLoginUserClass"/>
+            <class name="testCases.TC001_RegisterUserClass_update"/>
 
         </classes>
 

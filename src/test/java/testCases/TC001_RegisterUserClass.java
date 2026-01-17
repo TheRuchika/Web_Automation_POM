@@ -2,7 +2,6 @@ package testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.Base.BaseTest;
 import pages.HomePage;
 import pages.RegisterSuccessPage;
 import utils.Data;
@@ -14,10 +13,9 @@ import utils.PropertyFileReader;
  * This test verifies that a user can successfully register
  * using valid details and receives a confirmation message.
  */
-public class TC001_RegisterUserTest extends BaseTest {
+public class TC001_RegisterUserClass extends pages.Base.BaseClass {
 
-    PropertyFileReader propertyFileReader = new PropertyFileReader();
-    String pass = propertyFileReader.getProperty("testData","pass");
+    String browser = PropertyFileReader.getInstance().getProperty("config","browser");
 
     /**
      * Registers a new user and validates the success message.
@@ -25,6 +23,8 @@ public class TC001_RegisterUserTest extends BaseTest {
      */
     @Test
     public void TC001_registerUser() {
+
+        String pass = PropertyFileReader.getInstance().getProperty("testData","pass");
 
         // Test data (can be externalized later)
         String username = "TheRuchika";

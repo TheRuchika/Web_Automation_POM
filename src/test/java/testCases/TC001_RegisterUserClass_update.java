@@ -5,7 +5,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.Base.BaseTest;
 import pages.HomePage;
 import pages.RegisterPage;
 import pages.RegisterSuccessPage;
@@ -17,9 +16,9 @@ import utils.Data;
  * This test verifies that a user can successfully register
  * using valid details and receives a confirmation message.
  */
-public class TC001_RegisterUserTest_update extends BaseTest {
+public class TC001_RegisterUserClass_update extends pages.Base.BaseClass {
 
-    private static final Logger logger = LogManager.getLogger(TC001_RegisterUserTest_update.class);
+    private static final Logger logger = LogManager.getLogger(TC001_RegisterUserClass_update.class);
 
     /**
      * Registers a new user and validates the success message.

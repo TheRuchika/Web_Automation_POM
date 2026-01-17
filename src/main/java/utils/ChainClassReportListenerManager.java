@@ -2,10 +2,9 @@ package utils;
 
 import com.aventstack.chaintest.plugins.ChainTestListener;
 import org.testng.ITestListener;
-import org.testng.ITestNGListener;
 import org.testng.ITestResult;
 
-public class ChainTestReportListenerManager extends pages.Base.BaseTest implements ITestListener {
+public class ChainClassReportListenerManager extends pages.Base.BaseClass implements ITestListener {
 
 
         public void onTestStart(ITestResult result) {

@@ -8,6 +8,20 @@ import java.util.Properties;
 
 public class PropertyFileReader {
 
+    private static PropertyFileReader myObj;
+
+    //Singleton Design pattern
+    public static PropertyFileReader getInstance(){
+        if (myObj == null){
+            myObj = new PropertyFileReader();
+            System.out.println("Creating new object");
+            return myObj;
+        }else {
+            System.out.println("Using existing object");
+            return myObj;
+        }
+    }
+
     private Properties getData (String fileName){
 
         File file = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\"+fileName+".properties");
