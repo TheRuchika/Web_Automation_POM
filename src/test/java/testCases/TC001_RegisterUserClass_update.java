@@ -45,7 +45,12 @@ public class TC001_RegisterUserClass_update extends pages.Base.BaseClass {
 
         // Navigate to Register page
         HomePage homePage = new HomePage(driver);
-        RegisterPage registerPage = homePage.clickRegisterMenu();
+        RegisterPage registerPage = new RegisterPage(driver);
+        RegisterSuccessPage successPage = new RegisterSuccessPage(driver);
+
+        homePage.clickRegisterMenu();
+        ChainTestListener.embed(takeScreenshot(),"image/png");
+        homePage.clickRegisterMenu();
 
         // Screenshot: after navigation to Register page
         ChainTestListener.embed(takeScreenshot(), "image/png");
@@ -64,10 +69,12 @@ public class TC001_RegisterUserClass_update extends pages.Base.BaseClass {
         registerPage.setConfirmPassword(password);
 
         // Submit registration and land on Success page
-        RegisterSuccessPage successPage = registerPage.clickSubmit();
+        registerPage.clickSubmit();
 
         // Screenshot: after form submission
         ChainTestListener.embed(takeScreenshot(), "image/png");
+        registerPage.clickSubmit();
+        ChainTestListener.embed(takeScreenshot(),"image/png");
 
         // Validate registration success message
         Assert.assertTrue(
