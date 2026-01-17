@@ -48,17 +48,17 @@ public class TC001_RegisterUserClass_update extends pages.Base.BaseClass {
 
         // Navigate to Register page
         HomePage homePage = new HomePage(driver);
-        RegisterPage registerPage = new RegisterPage(driver);
-        RegisterSuccessPage successPage = new RegisterSuccessPage(driver);
-
-        homePage.clickRegisterMenu();
-        ChainTestListener.embed(takeScreenshot(),"image/png");
         homePage.clickRegisterMenu();
 
         // Screenshot: after navigation to Register page
         ChainTestListener.embed(takeScreenshot(), "image/png");
 
         // Fill registration form
+        RegisterPage registerPage = new RegisterPage(driver);
+        RegisterSuccessPage successPage = new RegisterSuccessPage(driver);
+
+        homePage.clickRegisterMenu();
+        ChainTestListener.embed(takeScreenshot(),"image/png");
         registerPage.setFirstName("Ruchika");
         registerPage.setLastName("Kaludewa");
         registerPage.setPhone("0719368140");
