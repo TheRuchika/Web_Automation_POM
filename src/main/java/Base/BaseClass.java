@@ -92,6 +92,7 @@ public class BaseClass {
                 new FileInputStream(System.getProperty("user.dir")
                         + "\\src\\test\\resources\\config.properties");
 
+
         Properties prop = new Properties();
         prop.load(fileInputStream);
 

@@ -32,6 +32,12 @@ public class TC001_RegisterUserClass_update extends pages.Base.BaseClass {
         // Report + log: test start
         ChainTestListener.log("TC001 started: User Registration");
         logger.info("=== Starting TC001: User Registration ===");
+        ChainTestListener.log("Test execution started");
+        logger.debug("debug TC001_1 Test");
+        logger.info("*** Starting TC001_1 Test ***");
+        logger.warn("Warn TC001_1 Test");
+        logger.error("Error TC001_1 Test");
+        logger.fatal("Fatal TC001_1 Test");
 
         // Test data (can be externalized later)
         String username = "TheRuchika";
@@ -68,6 +74,8 @@ public class TC001_RegisterUserClass_update extends pages.Base.BaseClass {
                 successPage.getRegisterSuccessMessage().contains("Dear"),
                 "Registration failed: Success message not displayed"
         );
+
+        logger.info("*** Executed TC001_1 Test ***");
 
         // Store credentials for login test (TC002)
         Data.username = username;
