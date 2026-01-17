@@ -2,6 +2,7 @@ package testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.Base.BaseTest;
 import pages.HomePage;
 import pages.RegisterSuccessPage;
 import utils.Data;
