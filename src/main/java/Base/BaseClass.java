@@ -21,66 +21,88 @@ import java.time.Duration;
 import java.util.Properties;
 
 /**
- * BaseTest class is responsible for:
- * - Initializing the WebDriver
- * - Opening the application URL
- * - Managing browser lifecycle across the test suite
+ * BaseClass
+ *
+ * Responsibilities:
+ * - Initialize WebDriver based on configuration
+ * - Launch application before test execution
+ * - Manage browser lifecycle across the test suite
+ * - Configure reporting and logging
+ * - Provide reusable utilities (screenshots)
  *
  * All test classes should extend this class.
  */
 public class BaseClass {
 
-   private static final Logger logger = LogManager.getLogger(pages.Base.BaseClass.class);
+    private static final Logger logger = LogManager.getLogger(BaseClass.class);
 
     protected static WebDriver driver;
 
-
+    /**
+     * Pre-suite setup:
+     * - Add system info to ChainTest report
+     * - Clean screenshot directory
+     * - Reset or create log file
+     */
     @BeforeSuite
-    public void beforeSuite(){
+    public void beforeSuite() {
 
-        ChainPluginService.getInstance().addSystemInfo("Tester",System.getProperty("user.name"));
-        ChainPluginService.getInstance().addSystemInfo("Browser", "chrome");
+        // Add system details to ChainTest report
+        ChainPluginService.getInstance()
+                .addSystemInfo("Tester", System.getProperty("user.name"));
+        ChainPluginService.getInstance()
+                .addSystemInfo("Browser", "chrome");
 
-        try{
-            String screenShotPath = System.getProperty("user.dir") + "/test-output/chainset/resources";
-            FileUtils.cleanDirectory(new File(screenShotPath));
-            logger.info("Screenshot folder cleaned : test-output/chaintest");
+        // Clean screenshot directory
+        try {
+            String screenshotPath =
+                    System.getProperty("user.dir") + "/test-output/chaintest/resources";
+            FileUtils.cleanDirectory(new File(screenshotPath));
+            logger.info("Screenshot directory cleaned");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to clean screenshot directory", e);
         }
 
+        // Clean or create log file
         try {
             String logFilePath = "logs/automation.log";
             File logFile = new File(logFilePath);
-            if(logFile.exists()){
-                FileUtils.write(logFile,"",false);
+
+            if (logFile.exists()) {
+                FileUtils.write(logFile, "", false);
                 logger.info("Log file cleaned: " + logFilePath);
-            }else {
+            } else {
                 FileUtils.touch(logFile);
-                logger.info("Log file created hence not exist: "+logFilePath);
+                logger.info("Log file created: " + logFilePath);
             }
         } catch (IOException e) {
-                logger.error("Error cleaning of creating the log file: "+e.getMessage());        }
+            logger.error("Error while preparing log file", e);
+        }
     }
 
     /**
-     * Initializes WebDriver once before the entire test suite.
+     * Initializes WebDriver once before executing the test suite.
+     * Reads browser type and application URL from config file.
      */
     @BeforeSuite
     public void setup() throws IOException {
 
-
-
-        FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\config.properties");
+        // Load configuration properties
+        FileInputStream fileInputStream =
+                new FileInputStream(System.getProperty("user.dir")
+                        + "\\src\\test\\resources\\config.properties");
 
 
         Properties prop = new Properties();
         prop.load(fileInputStream);
 
-        //Singleton Design pattern
-        String browser = PropertyFileReader.getInstance().getProperty("config","browser");
-        String appURL = PropertyFileReader.getInstance().getProperty("config","App_URL");
+        // Read values using Singleton PropertyFileReader
+        String browser =
+                PropertyFileReader.getInstance().getProperty("config", "browser");
+        String appURL =
+                PropertyFileReader.getInstance().getProperty("config", "App_URL");
 
+        // Initialize WebDriver based on browser type
         switch (browser.toLowerCase()) {
             case "chrome":
                 driver = new ChromeDriver();
@@ -92,34 +114,43 @@ public class BaseClass {
                 driver = new FirefoxDriver();
                 break;
             default:
-                System.out.println("Browser not supported: " + browser);
-                return;
+                throw new RuntimeException("Browser not supported: " + browser);
         }
-        logger.info("Test case automation with: " +browser);
 
+        logger.info("Executing tests on browser: " + browser);
+
+        // Browser configuration
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(prop.getProperty("implicit_wait"))));
+        driver.manage().timeouts().implicitlyWait(
+                Duration.ofSeconds(Long.parseLong(prop.getProperty("implicit_wait")))
+        );
 
         // Launch application
         driver.get(appURL);
     }
 
-
     /**
-     * Quits WebDriver after the entire test suite execution.
+     * Terminates WebDriver after all tests are executed.
      */
     @AfterSuite
     public void tearDown() {
+
         if (driver != null) {
             driver.quit();
             driver = null;
+            logger.info("Browser closed and WebDriver cleaned up");
         }
     }
 
-    public byte[] takeScreenshot(){
-        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
-        byte[] screenShot = takesScreenshot.getScreenshotAs(OutputType.BYTES);
-        return screenShot;
-    }
+    /**
+     * Captures screenshot in byte format.
+     * Useful for attaching screenshots to reports.
+     *
+     * @return screenshot as byte array
+     */
+    public byte[] takeScreenshot() {
 
+        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+        return takesScreenshot.getScreenshotAs(OutputType.BYTES);
+    }
 }
