@@ -47,7 +47,7 @@ public class BaseClass {
     @BeforeSuite
     public void beforeSuite() {
 
-        // Add system details to ChainTest report
+//         Add system details to ChainTest report
         ChainPluginService.getInstance()
                 .addSystemInfo("Tester", System.getProperty("user.name"));
         ChainPluginService.getInstance()
@@ -100,7 +100,7 @@ public class BaseClass {
         String browser =
                 PropertyFileReader.getInstance().getProperty("config", "browser");
         String appURL =
-                PropertyFileReader.getInstance().getProperty("config", "App_URL");
+                PropertyFileReader.getInstance().getProperty("config", "App_url");
 
         // Initialize WebDriver based on browser type
         switch (browser.toLowerCase()) {

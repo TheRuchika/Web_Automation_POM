@@ -20,7 +20,7 @@ public class TC002_RegisterLoginUserClass extends pages.Base.BaseClass {
      * Navigates to Sign-In from Register Success page,
      * logs in using stored credentials, and validates login success message.
      */
-    @Test(dependsOnMethods = "testCases.TC001_RegisterUserTest.TC001_registerUser")
+    @Test(dependsOnMethods = "testCases.TC001_RegisterUserClass.TC001_registerUser")
     public void TC002_loginWithRegisteredUser() {
         String pass = PropertyFileReader.getInstance().getProperty("TestData","pass");
 
