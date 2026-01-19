@@ -28,7 +28,7 @@ public class TC001_RegisterUserClass extends pages.Base.BaseClass {
 
         // Test data (can be externalized later)
         String username = "TheRuchika";
-        String password = "Ruchika12345";
+        String password = "Ruchika123";
 
         // Initialize Home Page
         HomePage homePage = new HomePage(driver);
