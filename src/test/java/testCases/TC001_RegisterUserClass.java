@@ -24,16 +24,14 @@ public class TC001_RegisterUserClass extends pages.Base.BaseClass {
     @Test
     public void TC001_registerUser() {
 
-        String pass = PropertyFileReader.getInstance().getProperty("testData","pass");
-
-        // Test data (can be externalized later)
-        String username = "TheRuchika";
-        String password = "Ruchika12345";
+        // Read test data from properties (externalized test data)
+        String username = PropertyFileReader.getInstance().getProperty("testData", "username");
+        String password = PropertyFileReader.getInstance().getProperty("testData", "pass");
 
         // Initialize Home Page
         HomePage homePage = new HomePage(driver);
 
-        // Perform user registration using method chaining (POM)
+        // Perform user registration using POM method chaining
         RegisterSuccessPage successPage =
                 homePage.clickRegisterMenu()
                         .setFirstName("Ruchika")
@@ -41,7 +39,7 @@ public class TC001_RegisterUserClass extends pages.Base.BaseClass {
                         .setPhone("0719368140")
                         .setEmail("ruchikapromodya@gmail.com")
                         .setUserName(username)
-                        .setPassword(pass)
+                        .setPassword(password)
                         .setConfirmPassword(password)
                         .clickSubmit();
 
