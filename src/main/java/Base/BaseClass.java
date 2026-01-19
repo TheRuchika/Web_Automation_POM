@@ -1,4 +1,4 @@
-package pages.Base;
+package Base;
 
 import com.aventstack.chaintest.service.ChainPluginService;
 import org.apache.commons.io.FileUtils;
