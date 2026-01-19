@@ -13,7 +13,7 @@ import utils.PropertyFileReader;
  * This test depends on TC001 (registration) and verifies that the user
  * can log in successfully using the stored credentials.
  */
-public class TC002_RegisterLoginUserClass extends pages.Base.BaseClass {
+public class TC002_RegisterLoginUserClass extends Base.BaseClass {
 
 
     /**

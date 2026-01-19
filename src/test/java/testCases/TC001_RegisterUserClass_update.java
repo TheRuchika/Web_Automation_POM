@@ -18,7 +18,7 @@ import utils.Data;
  * - Captures screenshots at key steps for ChainTest report
  * - Logs execution details using Log4j
  */
-public class TC001_RegisterUserClass_update extends pages.Base.BaseClass {
+public class TC001_RegisterUserClass_update extends Base.BaseClass {
 
     private static final Logger logger = LogManager.getLogger(TC001_RegisterUserClass_update.class);
 

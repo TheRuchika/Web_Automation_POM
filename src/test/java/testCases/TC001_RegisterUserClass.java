@@ -2,10 +2,10 @@ package testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.Base.BaseClass;
 import pages.HomePage;
 import pages.RegisterSuccessPage;
 import utils.Data;
+import utils.PropertyFileReader;
 
 /**
  * Test Case: TC001 – User Registration
@@ -13,7 +13,7 @@ import utils.Data;
  * This test verifies that a user can successfully register
  * using valid details and receives a confirmation message.
  */
-public class TC001_RegisterUserClass extends pages.Base.BaseClass {
+public class TC001_RegisterUserClass extends Base.BaseClass {
 
     String browser = PropertyFileReader.getInstance().getProperty("config","browser");
 

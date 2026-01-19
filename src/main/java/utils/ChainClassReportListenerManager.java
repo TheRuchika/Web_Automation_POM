@@ -3,7 +3,7 @@ package utils;
 import com.aventstack.chaintest.plugins.ChainTestListener;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import pages.Base.BaseClass;
+import Base.BaseClass;
 
 /**
  * ChainClassReportListenerManager
