@@ -1,7 +1,7 @@
 # Selenium Page Object Model (POM) – Registration & Login Flow
 
 This project demonstrates a **Selenium Page Object Model (POM)** framework implemented using **Java and TestNG**.  
-The focus of this project is **clean structure, readability, and maintainable automation code**, along with **CI integration using Jenkins**.
+The focus of this project is **clean structure, readability, and maintainable automation code**.
 
 ---
 
@@ -11,7 +11,6 @@ The focus of this project is **clean structure, readability, and maintainable au
 - TestNG
 - Maven
 - ChromeDriver
-- Jenkins (CI)
 
 ---
 
@@ -23,23 +22,16 @@ The focus of this project is **clean structure, readability, and maintainable au
 - Test classes contain **business flow and assertions**
 
 ### 🔹 Readability & Maintainability
-- Clear class and method naming conventions
-- Method-based actions for reusable steps
+- Clear class and method names
+- Method chaining for fluent test steps
 - Well-structured comments explaining intent
-- No direct `WebElement` usage inside test classes
+- No direct WebElement usage in test classes
 
 ### 🔹 Test Design
 - End-to-end registration and login flow
 - Test dependency handling using `dependsOnMethods`
 - Shared test data via utility class
 - Centralized WebDriver lifecycle management
-
-### 🔹 CI Integration (Jenkins)
-- Jenkins Pipeline configured using a `Jenkinsfile`
-- Poll SCM used for safe, automated builds
-- Builds triggered automatically on Git changes
-- Test execution handled via Maven
-- Test reports archived after execution
 
 ---
 
@@ -59,8 +51,8 @@ The focus of this project is **clean structure, readability, and maintainable au
 
 ---
 
-## ▶️ How to Run the Tests Locally
+## ▶️ How to Run the Tests
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/TheRuchika/Web_Automation_POM.git
+   git clone https://github.com/TheRuchika/Web_Automation_POM

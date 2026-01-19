@@ -2,11 +2,10 @@ package testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.Base.BaseTest;
+import pages.Base.BaseClass;
 import pages.HomePage;
 import pages.RegisterSuccessPage;
 import utils.Data;
-import utils.PropertyFileReader;
 
 /**
  * Test Case: TC001 – User Registration
@@ -14,14 +13,13 @@ import utils.PropertyFileReader;
  * This test verifies that a user can successfully register
  * using valid details and receives a confirmation message.
  */
-public class TC001_RegisterUserTest extends BaseTest {
+public class TC001_RegisterUserClass extends pages.Base.BaseClass {
 
-    PropertyFileReader propertyFileReader = new PropertyFileReader();
-    String pass = propertyFileReader.getProperty("testData","pass");
+    String browser = PropertyFileReader.getInstance().getProperty("config","browser");
 
     /**
-     * Registers a new user and validates the success message.
-     * Stores the registered credentials for reuse in login test.
+     * Registers a new user and validates the registration success message.
+     * Stores the credentials for reuse in the login test (TC002).
      */
     @Test
     public void TC001_registerUser() {
@@ -41,7 +39,7 @@ public class TC001_RegisterUserTest extends BaseTest {
                         .setPhone("0719368140")
                         .setEmail("ruchikapromodya@gmail.com")
                         .setUserName(username)
-                        .setPassword(pass)
+                        .setPassword(password)
                         .setConfirmPassword(password)
                         .clickSubmit();
 
