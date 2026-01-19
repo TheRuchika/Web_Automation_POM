@@ -38,6 +38,9 @@ public class TC001_RegisterUserClass_update extends pages.Base.BaseClass {
         logger.warn("Warn TC001_1 Test");
         logger.error("Error TC001_1 Test");
         logger.fatal("Fatal TC001_1 Test");
+        // Report + log: test start
+        ChainTestListener.log("TC001 started: User Registration");
+        logger.info("=== Starting TC001: User Registration ===");
 
         // Test data (can be externalized later)
         String username = "TheRuchika";
