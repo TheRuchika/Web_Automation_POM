@@ -153,4 +153,5 @@ public class BaseClass {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
         return takesScreenshot.getScreenshotAs(OutputType.BYTES);
     }
+
 }
